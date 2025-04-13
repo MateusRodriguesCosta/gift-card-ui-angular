@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "incomm-poc": {
+    "gift-card-ui": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -24,7 +24,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/incomm-poc",
+            "outputPath": "dist/gift-card-ui",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "incomm-poc:build:production"
+              "buildTarget": "gift-card-ui:build:production"
             },
             "development": {
-              "buildTarget": "incomm-poc:build:development"
+              "buildTarget": "gift-card-ui:build:development"
             }
           },
           "defaultConfiguration": "development"
