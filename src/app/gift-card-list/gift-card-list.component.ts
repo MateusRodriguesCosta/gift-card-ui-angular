@@ -5,6 +5,7 @@ import { GiftCardService } from './service/gift-card.service';
 
 @Component({
   selector: 'app-gift-card-list',
+  standalone: true,
   templateUrl: './gift-card-list.component.html',
   styleUrl: './gift-card-list.component.scss'
 })
