@@ -1,0 +1,56 @@
+<div class="gift-card-overview-header">
+    <span class="gift-card-title">Gift Cards Overview</span>
+    <p-iconfield class="search-field">
+        <p-inputicon class="pi pi-search" />
+        <input
+            pInputText
+            [(ngModel)]="searchQuery"
+            placeholder="Search Cards..."
+            class="gift-card-search"
+            (ngModelChange)="searchGiftCards()"
+        />
+    </p-iconfield>
+</div>
+<div class="gift-card-table-container">
+    <p-table
+        [value]="filteredGiftCards"
+        selectionMode="single"
+        [(selection)]="selectedGiftCard"
+        [loading]="loading"
+        [rows]="5"
+        styleClass="gift-card-table">
+        <ng-template #header>
+            <tr>
+                <th pSortableColumn="token">Token <p-sortIcon field="token" /></th>
+                <th pSortableColumn="cardNumber">
+                    Card Number <p-sortIcon field="cardNumber" />
+                </th>
+
+                <th pSortableColumn="balance">Balance <p-sortIcon field="balance" /></th>
+                <th pSortableColumn="status">
+                    Status <p-sortIcon field="status" />
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-giftCard>
+            <tr>
+                <td>{{ giftCard.token }}</td>
+                <td>{{ giftCard.cardNumber }}</td>
+                <td>{{ giftCard.balance }}</td>
+                <td>
+                    <p-tag
+                        [severity]="
+                  giftCard.status === 'ACTIVE'
+                    ? 'success'
+                    : giftCard.status === 'CANCELLED'
+                    ? 'warn'
+                    : 'danger'
+                "
+                    >
+                        {{ giftCard.status }}
+                    </p-tag>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

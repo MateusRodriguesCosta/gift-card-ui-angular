@@ -1,0 +1,69 @@
+:host ::ng-deep  {
+  .p-datatable-mask {
+    backdrop-filter: blur(4px) !important;
+    background-color: color-mix(in srgb, var(--p-surface-0), transparent 80%) !important;
+  }
+  .p-dark .p-datatable-mask {
+    background-color: color-mix(in srgb, var(--p-surface-900), transparent 80%) !important;
+  }
+
+  .p-datatable-loading-icon {
+    color: var(--p-primary-500) !important;
+  }
+}
+
+.gift-card-overview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 640px) {
+  .gift-card-overview-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .gift-card-overview-header .search-field {
+    width: 100%;
+  }
+}
+
+.gift-card-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--p-surface-900);
+}
+
+.gift-card-table-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: var(--p-surface-0);
+}
+
+.gift-card-table {
+  width: 100%;
+  color: var(--p-surface-900);
+}
+
+.gift-card-search {
+  font-size: 0.875rem;
+  padding: 0.5rem;
+  background-color: var(--p-surface-0);
+  color: var(--p-surface-900);
+  border: 1px solid var(--p-surface-200);
+}
+
+@media (min-width: 768px) {
+  .gift-card-search {
+    width: auto !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .gift-card-search {
+    width: 100% !important;
+  }
+}

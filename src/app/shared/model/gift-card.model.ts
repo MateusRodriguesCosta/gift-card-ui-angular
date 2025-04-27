@@ -4,4 +4,4 @@ export interface GiftCard {
     balance: number;
     status: string;
     expirationDate: Date;
-  }
+}
