@@ -1,0 +1,10 @@
+<span class="chart-title">Recent Transactions</span>
+<div class="gift-card-transactions-list">
+    <div *ngFor="let activity of transactions; let i = index" class="gift-card-transactions-item">
+        <i [ngClass]="['gift-card-transactions-icon', activity.color, 'pi', activity.icon]"></i>
+        <div class="gift-card-transactions-content">
+            <span class="gift-card-transactions-text">{{ activity.text }}</span>
+            <span class="gift-card-transactions-time">{{ activity.time }}</span>
+        </div>
+    </div>
+</div>

@@ -3,18 +3,11 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "gift-card-ui": {
+    "gift-card-ui-angular": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss",
-          "standalone": false
-        },
-        "@schematics/angular:directive": {
-          "standalone": false
-        },
-        "@schematics/angular:pipe": {
-          "standalone": false
+          "style": "scss"
         }
       },
       "root": "",
@@ -24,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/gift-card-ui",
+            "outputPath": "dist/gift-card-ui-angular",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -53,8 +46,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
                 }
               ],
               "outputHashing": "all"
@@ -71,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "gift-card-ui:build:production"
+              "buildTarget": "gift-card-ui-angular:build:production"
             },
             "development": {
-              "buildTarget": "gift-card-ui:build:development"
+              "buildTarget": "gift-card-ui-angular:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -105,5 +98,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

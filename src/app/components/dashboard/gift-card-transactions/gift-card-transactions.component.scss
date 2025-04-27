@@ -1,0 +1,61 @@
+.col-item-2 {
+  width: 50%;
+}
+.gift-card-transactions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+}
+
+.gift-card-transactions-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid var(--p-surface-200);
+  border-radius: 0.5rem;
+  background-color: var(--p-surface-50);
+}
+
+.gift-card-transactions-icon {
+  font-size: 1.125rem !important;
+}
+
+.gift-card-transactions-icon.green {
+  color: #22c55e;
+}
+
+.gift-card-transactions-icon.blue {
+  color: #3b82f6;
+}
+
+.gift-card-transactions-icon.yellow {
+  color: #eab308;
+}
+
+.gift-card-transactions-icon.pink {
+  color: #ec4899;
+}
+
+.gift-card-transactions-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.gift-card-transactions-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.gift-card-transactions-time {
+  font-size: 0.75rem;
+  color: var(--p-surface-600);
+}
+
+@media (max-width: 991px) {
+  .col-item-2 {
+    width: 100%;
+  }
+}
