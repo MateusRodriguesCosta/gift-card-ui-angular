@@ -9,12 +9,10 @@ This repository contains an Angular application that serves as an administration
 
 ## 🔧 Current Project Stack
 
-- **Angular 19**
+- **Angular 18**
 - **TypeScript** 5.4.2
-- **Sakai Template & PrimeNG** 19.0.8
-- **Tailwind CSS**
+- **Bootstrap & PrimeNG**
 - **RxJS** 7.8.0
 - **NgRx**
 - **ngx-toastr**
-- **Jasmine** 5.4.0
-- **Karma** 6.4.0
+- **Jasmine & Karma**
