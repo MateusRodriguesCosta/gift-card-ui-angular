@@ -8,7 +8,7 @@ import { GiftCard } from '../model/gift-card.model';
     providedIn: 'root'
 })
 export class GiftCardService {
-    private baseUrl = 'http://localhost:8080/api/giftcards';
+    private baseUrl = 'http://localhost:8080/api/v1/giftcards';
 
     constructor(private http: HttpClient) {}
 

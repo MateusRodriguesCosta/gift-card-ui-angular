@@ -82,7 +82,6 @@ export class GiftCardOverviewComponent implements OnInit {
 
     ngOnInit() {
         this.filteredGiftCards = [...this.giftCards];
-        this.authService.login("user", "user123").subscribe();
         this.giftCardService.giftCards$.pipe(
             tap((giftCards) => {
                 console.log(giftCards);
