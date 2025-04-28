@@ -1,6 +1,8 @@
-<div class="layout-container">
-  <div class="layout-grid">
-      <gift-card-transactions />
-      <gift-card-overview />
-  </div>
-</div>
+@if (this.authService.token) {
+    <div class="layout-container">
+        <div class="layout-grid">
+            <gift-card-transactions />
+            <gift-card-overview />
+        </div>
+    </div>
+}
