@@ -8,7 +8,7 @@ export class AuthService {
 
     login(username: string, password: string) {
         return this.http.post<{token:string}>('http://localhost:8080/auth/login', { username, password })
-            .pipe(tap(res => localStorage.setItem('token', JSON.stringify(res))));
+            .pipe(tap(res => localStorage.setItem('token', res.token)));
     }
     get token(): string | null {
         return localStorage.getItem('token');

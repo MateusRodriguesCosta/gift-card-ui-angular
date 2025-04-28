@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GiftCardTransactionsComponent } from './components/dashboard/gift-card-transactions/gift-card-transactions.component';
 import { GiftCardOverviewComponent } from './components/dashboard/gift-card-overview/gift-card-overview.component';
+import { AuthService } from './shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +9,11 @@ import { GiftCardOverviewComponent } from './components/dashboard/gift-card-over
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
+  constructor(protected authService: AuthService) {}
+
+  ngOnInit() {
+    if (!this.authService.token) this.authService.login("user", "user123").subscribe();
+  }
 }
