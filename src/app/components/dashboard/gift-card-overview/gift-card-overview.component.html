@@ -2,23 +2,14 @@
     <span class="gift-card-title">Gift Cards Overview</span>
     <p-iconfield class="search-field">
         <p-inputicon class="pi pi-search" />
-        <input #searchField
-            pInputText
-            [formControl]="searchControl"
-            placeholder="Search Cards..."
-            class="gift-card-search"
-            (input)="dt.filterGlobal(searchField.value, 'contains')"
-        />
+        <input pInputText [formControl]="searchControl" placeholder="Search Cards..." class="gift-card-search" />
     </p-iconfield>
 </div>
 <div class="gift-card-table-container">
-    <p-table #dt
-        [value]="(giftCards$ | async) ?? []" [globalFilterFields]="['token','maskedCardNumber','status']"
-        selectionMode="single"
-        [(selection)]="selectedGiftCard"
-        [rows]="5"
-        styleClass="gift-card-table">
-        <ng-template #header>
+    <p-table [value]="(rows$ | async) ?? []" [globalFilterFields]="['token','maskedCardNumber','status']"
+             [paginator]="true" [rows]="pageSize" [totalRecords]="totalRecords" styleClass="gift-card-table"
+             [lazy]="true" (onLazyLoad)="loadData($event)" [loading]="loading">
+        <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="token">Token <p-sortIcon field="token" /></th>
                 <th pSortableColumn="cardNumber">Card Number <p-sortIcon field="cardNumber" /></th>
@@ -26,12 +17,11 @@
                 <th pSortableColumn="balance">Balance <p-sortIcon field="balance" /></th>
                 <th pSortableColumn="issueDate">Issue Date <p-sortIcon field="issueDate" /></th>
                 <th pSortableColumn="expiryDate">Expiry Date <p-sortIcon field="expiryDate" /></th>
-                <th pSortableColumn="status">
-                    Status <p-sortIcon field="status" />
+                <th pSortableColumn="status">Status <p-sortIcon field="status" />
                 </th>
             </tr>
         </ng-template>
-        <ng-template #body let-giftCard>
+        <ng-template pTemplate="body" let-giftCard>
             <tr>
                 <td>{{ giftCard.token }}</td>
                 <td>{{ giftCard.maskedCardNumber }}</td>

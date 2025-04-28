@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { GiftCard } from '../model/gift-card.model';
+import { Page } from '../interface/page.interface';
 
 
 @Injectable({
@@ -12,8 +13,13 @@ export class GiftCardService {
 
     constructor(private http: HttpClient) {}
 
-    get giftCards$(): Observable<GiftCard[]> {
-        return this.http.get<GiftCard[]>(this.baseUrl);
+    getGiftCards(page: number, size: number, filter: string): Observable<Page<GiftCard>> {
+        let params = new HttpParams()
+            .set('page', page)
+            .set('size', size)
+            .set('filter', filter);
+
+        return this.http.get<Page<GiftCard>>(this.baseUrl, {params});
     }
 
     createGiftCard(giftCard: GiftCard): Observable<GiftCard> {
