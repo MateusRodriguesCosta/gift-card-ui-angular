@@ -1,7 +1,10 @@
 export interface GiftCard {
-    id?: number;
-    code: string;
+    token: string;
+    maskedCardNumber: string;
     balance: number;
-    status: string;
-    expirationDate: Date;
+    currency: string;
+    region: string;
+    status: 'ACTIVE' | 'PENDING' | 'EXPIRED' | 'LOST' | 'STOLEN' | 'CANCELLED';
+    expiryDate: Date;
+    issueDate: Date;
 }

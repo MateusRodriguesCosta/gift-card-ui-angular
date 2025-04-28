@@ -2,31 +2,30 @@
     <span class="gift-card-title">Gift Cards Overview</span>
     <p-iconfield class="search-field">
         <p-inputicon class="pi pi-search" />
-        <input
+        <input #searchField
             pInputText
-            [(ngModel)]="searchQuery"
+            [formControl]="searchControl"
             placeholder="Search Cards..."
             class="gift-card-search"
-            (ngModelChange)="searchGiftCards()"
+            (input)="dt.filterGlobal(searchField.value, 'contains')"
         />
     </p-iconfield>
 </div>
 <div class="gift-card-table-container">
-    <p-table
-        [value]="filteredGiftCards"
+    <p-table #dt
+        [value]="(giftCards$ | async) ?? []" [globalFilterFields]="['token','maskedCardNumber','status']"
         selectionMode="single"
         [(selection)]="selectedGiftCard"
-        [loading]="loading"
         [rows]="5"
         styleClass="gift-card-table">
         <ng-template #header>
             <tr>
                 <th pSortableColumn="token">Token <p-sortIcon field="token" /></th>
-                <th pSortableColumn="cardNumber">
-                    Card Number <p-sortIcon field="cardNumber" />
-                </th>
-
+                <th pSortableColumn="cardNumber">Card Number <p-sortIcon field="cardNumber" /></th>
+                <th pSortableColumn="region">Region <p-sortIcon field="region" /></th>
                 <th pSortableColumn="balance">Balance <p-sortIcon field="balance" /></th>
+                <th pSortableColumn="issueDate">Issue Date <p-sortIcon field="issueDate" /></th>
+                <th pSortableColumn="expiryDate">Expiry Date <p-sortIcon field="expiryDate" /></th>
                 <th pSortableColumn="status">
                     Status <p-sortIcon field="status" />
                 </th>
@@ -35,14 +34,16 @@
         <ng-template #body let-giftCard>
             <tr>
                 <td>{{ giftCard.token }}</td>
-                <td>{{ giftCard.cardNumber }}</td>
-                <td>{{ giftCard.balance }}</td>
+                <td>{{ giftCard.maskedCardNumber }}</td>
+                <td>{{ giftCard.region }}</td>
+                <td>{{ giftCard.balance | currency:giftCard.currency||DEFAULT_CURRENCY_CODE:'symbol':'1.2-2' }}</td>
+                <td>{{ giftCard.issueDate | date }}</td>
+                <td>{{ giftCard.expiryDate | date }}</td>
                 <td>
-                    <p-tag
-                        [severity]="
-                  giftCard.status === 'ACTIVE'
+                    <p-tag [severity]="
+                      giftCard.status === 'ACTIVE'
                     ? 'success'
-                    : giftCard.status === 'CANCELLED'
+                    : giftCard.status === 'EXPIRED'
                     ? 'warn'
                     : 'danger'
                 "
