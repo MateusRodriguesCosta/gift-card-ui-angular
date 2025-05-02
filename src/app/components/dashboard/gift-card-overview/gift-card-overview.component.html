@@ -44,16 +44,23 @@
                 <td>
                     <p-button
                         class="mr-2"
-                        icon="pi pi-pencil"
+                        icon="pi pi-pen-to-square"
                         pTooltip="Update Card"
                         tooltipPosition="top"
-                        severity="info"></p-button>
+                        outlined="true"
+                        rounded="true"
+                        severity="info"
+                        (onClick)="onClickEditCard($event)"></p-button>
                     <p-button
 
-                        icon="pi pi-check"
+                        icon="pi pi-check-square"
                         pTooltip="Check Card Validity"
                         tooltipPosition="top"
-                        severity="success"></p-button>
+                        outlined="true"
+                        rounded="true"
+                        severity="success"
+                        [ngClass]=""
+                        (onClick)="onClickCheckCard($event)"></p-button>
                 </td>
             </tr>
         </ng-template>

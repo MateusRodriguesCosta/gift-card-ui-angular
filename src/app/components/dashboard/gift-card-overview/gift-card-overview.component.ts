@@ -86,5 +86,8 @@ export class GiftCardOverviewComponent implements OnInit {
         this.lazyLoad$.next(event);
     }
 
+    onClickEditCard(event: Event) {}
+    onClickCheckCard(event: Event) {}
+
     protected readonly DEFAULT_CURRENCY_CODE = DEFAULT_CURRENCY_CODE;
 }
