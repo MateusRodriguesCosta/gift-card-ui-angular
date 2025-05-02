@@ -18,7 +18,7 @@
                 <th pSortableColumn="issueDate">Issue Date <p-sortIcon field="issueDate" /></th>
                 <th pSortableColumn="expiryDate">Expiry Date <p-sortIcon field="expiryDate" /></th>
                 <th pSortableColumn="status">Status <p-sortIcon field="status" /></th>
-                <th>Action</th>
+                <th>Actions</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-giftCard>
@@ -42,25 +42,71 @@
                     </p-tag>
                 </td>
                 <td>
-                    <p-button
-                        class="mr-2"
-                        icon="pi pi-pen-to-square"
-                        pTooltip="Update Card"
-                        tooltipPosition="top"
-                        outlined="true"
-                        rounded="true"
-                        severity="info"
-                        (onClick)="onClickEditCard($event)"></p-button>
-                    <p-button
-
-                        icon="pi pi-check-square"
-                        pTooltip="Check Card Validity"
-                        tooltipPosition="top"
-                        outlined="true"
-                        rounded="true"
-                        severity="success"
-                        [ngClass]=""
-                        (onClick)="onClickCheckCard($event)"></p-button>
+                    <div class="grid gap-3">
+                        <div class="col-1">
+                            <p-button
+                                icon="pi pi-pen-to-square"
+                                pTooltip="Update Card"
+                                tooltipPosition="top"
+                                outlined="true"
+                                rounded="true"
+                                severity="info"
+                                text="true"
+                                (onClick)="onClickEditCard($event)"></p-button>
+                        </div>
+                        <div class="col-1">
+                            <p-button
+                                icon="pi pi-dollar"
+                                pTooltip="Balance Operations"
+                                tooltipPosition="top"
+                                outlined="true"
+                                rounded="true"
+                                severity="success"
+                                text="true"></p-button>
+                        </div>
+                        <div class="col-1">
+                            <p-button
+                                icon="pi pi-calendar-plus"
+                                pTooltip="Renew Validity"
+                                tooltipPosition="top"
+                                outlined="true"
+                                rounded="true"
+                                severity="info"
+                                text="true"></p-button>
+                        </div>
+                        <div class="col-1">
+                            <p-button
+                                icon="pi pi-pause"
+                                pTooltip="Block/Unblock"
+                                tooltipPosition="top"
+                                outlined="true"
+                                rounded="true"
+                                severity="danger"
+                                text="true"
+                                [loading]="blockingUnblockingMap[giftCard.token]"
+                                (onClick)="onClickBlockUnblockCard(giftCard)"></p-button>
+                        </div>
+                        <div class="col-1">
+                            <p-button
+                                icon="pi pi-chart-bar"
+                                pTooltip="Audit Report"
+                                tooltipPosition="top"
+                                outlined="true"
+                                rounded="true"
+                                severity="info"
+                                text="true"></p-button>
+                        </div>
+                        <div class="col-1">
+                            <p-button
+                                icon="pi pi-envelope"
+                                pTooltip="Send Via Email"
+                                tooltipPosition="top"
+                                outlined="true"
+                                rounded="true"
+                                severity="info"
+                                text="true"></p-button>
+                        </div>
+                    </div>
                 </td>
             </tr>
         </ng-template>

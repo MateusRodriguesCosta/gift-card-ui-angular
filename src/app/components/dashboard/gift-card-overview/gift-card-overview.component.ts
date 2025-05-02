@@ -13,8 +13,9 @@ import {
     BehaviorSubject,
     catchError,
     combineLatest,
-    debounceTime,
+    debounceTime, delay,
     distinctUntilChanged,
+    finalize,
     map,
     Observable,
     of,
@@ -46,11 +47,12 @@ import { Tooltip } from 'primeng/tooltip';
     styleUrl: 'gift-card-overview.component.scss'
 })
 export class GiftCardOverviewComponent implements OnInit {
-    searchControl = new FormControl<string>('', {nonNullable: true});
     private lazyLoad$ = new BehaviorSubject<TableLazyLoadEvent>({ first: 0, rows: 10 });
+    searchControl = new FormControl<string>('', {nonNullable: true});
     rows$!: Observable<GiftCard[]>;
     totalRecords = 0;
     loading = false;
+    blockingUnblockingMap: Record<string, boolean> = {};
     pageSize = 10;
 
     constructor(private giftCardService: GiftCardService) {}
@@ -86,8 +88,23 @@ export class GiftCardOverviewComponent implements OnInit {
         this.lazyLoad$.next(event);
     }
 
-    onClickEditCard(event: Event) {}
-    onClickCheckCard(event: Event) {}
+    onClickEditCard($event: Event) {}
+    onClickBlockUnblockCard(giftCard: GiftCard) {
+        this.blockingUnblockingMap[giftCard.token] = true;
+        this.giftCardService.checkGiftCardValidity(giftCard.token).pipe(
+            tap((result) => {
+                console.log(giftCard, result);
+            }),
+            delay(5000),
+            catchError(error => {
+                console.log(error);
+                return of(null);
+            }),
+            finalize(() => {
+                this.blockingUnblockingMap[giftCard.token] = false;
+            })
+        ).subscribe();
+    }
 
     protected readonly DEFAULT_CURRENCY_CODE = DEFAULT_CURRENCY_CODE;
 }

@@ -25,4 +25,8 @@ export class GiftCardService {
     createGiftCard(giftCard: GiftCard): Observable<GiftCard> {
         return this.http.post<GiftCard>(this.baseUrl, giftCard);
     }
+    
+    checkGiftCardValidity(token: string): Observable<boolean> {
+        return this.http.get<boolean>(this.baseUrl + `/isValid/${token}`);
+    }
 }
