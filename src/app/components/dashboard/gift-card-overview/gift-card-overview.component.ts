@@ -10,17 +10,20 @@ import { TagModule } from 'primeng/tag';
 import { RatingModule } from 'primeng/rating';
 import { GiftCardService } from '../../../shared/services/gift-card.service';
 import {
-    BehaviorSubject, catchError,
+    BehaviorSubject,
+    catchError,
     combineLatest,
     debounceTime,
-    distinctUntilChanged, map,
-    Observable, of,
+    distinctUntilChanged,
+    map,
+    Observable,
+    of,
     startWith,
     switchMap,
     tap
 } from 'rxjs';
 import { GiftCard } from '../../../shared/model/gift-card.model';
-import { LazyLoadEvent } from 'primeng/api';
+import { Tooltip } from 'primeng/tooltip';
 
 @Component({
     selector: 'gift-card-overview',
@@ -35,7 +38,8 @@ import { LazyLoadEvent } from 'primeng/api';
         TableModule,
         TagModule,
         RatingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        Tooltip
     ],
     templateUrl: 'gift-card-overview.component.html',
     host: { class: 'layout-card' },

@@ -17,8 +17,8 @@
                 <th pSortableColumn="balance">Balance <p-sortIcon field="balance" /></th>
                 <th pSortableColumn="issueDate">Issue Date <p-sortIcon field="issueDate" /></th>
                 <th pSortableColumn="expiryDate">Expiry Date <p-sortIcon field="expiryDate" /></th>
-                <th pSortableColumn="status">Status <p-sortIcon field="status" />
-                </th>
+                <th pSortableColumn="status">Status <p-sortIcon field="status" /></th>
+                <th>Action</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-giftCard>
@@ -40,6 +40,20 @@
                     >
                         {{ giftCard.status }}
                     </p-tag>
+                </td>
+                <td>
+                    <p-button
+                        class="mr-2"
+                        icon="pi pi-pencil"
+                        pTooltip="Update Card"
+                        tooltipPosition="top"
+                        severity="info"></p-button>
+                    <p-button
+
+                        icon="pi pi-check"
+                        pTooltip="Check Card Validity"
+                        tooltipPosition="top"
+                        severity="success"></p-button>
                 </td>
             </tr>
         </ng-template>
