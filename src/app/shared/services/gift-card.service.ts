@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { GiftCard } from '../model/gift-card.model';
-import { Page } from '../interface/page.interface';
+import { GiftCard } from '../interfaces/gift-card.interface';
+import { Page } from '../interfaces/page.interface';
 
 
 @Injectable({

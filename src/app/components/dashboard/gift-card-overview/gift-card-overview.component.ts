@@ -23,7 +23,7 @@ import {
     switchMap,
     tap
 } from 'rxjs';
-import { GiftCard } from '../../../shared/model/gift-card.model';
+import { GiftCard } from '../../../shared/interfaces/gift-card.interface';
 import { Tooltip } from 'primeng/tooltip';
 
 @Component({
