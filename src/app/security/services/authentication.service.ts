@@ -18,7 +18,7 @@ export class AuthenticationService {
 
     refreshToken(): Observable<AuthenticationResponse> {
         const refreshToken = this.authenticationTokenService.refreshToken;
-        return this.http.post<AuthenticationResponse>(`${this.baseUrl}/refresh-token`, {}, { headers: { Authorization: `Bearer ${refreshToken}` }})
+        return this.http.post<AuthenticationResponse>(`${this.baseUrl}/refresh-token`, { refreshToken: refreshToken })
             .pipe(tap(res => this.authenticationTokenService.saveTokens(res.accessToken, res.refreshToken)));
     }
 }

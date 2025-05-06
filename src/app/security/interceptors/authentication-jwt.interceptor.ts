@@ -45,7 +45,7 @@ export const UnauthorizedErrorInterceptor: HttpInterceptorFn = (request: HttpReq
                     })
                 );
             }
-            return throwError(() => new Error('Unauthorized Exception'));
+            return throwError(() => error);
         })
     );
 };
