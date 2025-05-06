@@ -14,6 +14,6 @@ export class AppComponent implements OnInit {
   constructor(protected authService: AuthService) {}
 
   ngOnInit() {
-    if (!this.authService.token) this.authService.login("user", "user123").subscribe();
+    if (!this.authService.accessToken) this.authService.login("user", "user123").subscribe();
   }
 }

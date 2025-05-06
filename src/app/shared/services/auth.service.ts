@@ -1,16 +1,42 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
-@Injectable({providedIn: 'root'})
+export type AuthResponse = {
+    accessToken: string;
+    refreshToken: string;
+}
+
+@Injectable({ providedIn: 'root' })
 export class AuthService {
-    constructor(private http: HttpClient) {}
-
-    login(username: string, password: string) {
-        return this.http.post<{token:string}>('http://localhost:8080/auth/login', { username, password })
-            .pipe(tap(res => localStorage.setItem('token', res.token)));
+    constructor(private http: HttpClient) {
     }
-    get token(): string | null {
-        return localStorage.getItem('token');
+
+    private readonly baseUrl: string = 'http://localhost:8080/auth';
+
+    login(username: string, password: string): Observable<AuthResponse> {
+        return this.http.post<AuthResponse>(`${this.baseUrl}/login`, { username, password })
+            .pipe(tap(res => {
+                localStorage.setItem('accessToken', res.accessToken);
+                localStorage.setItem('refreshToken', res.refreshToken);
+            }));
+    }
+
+    refreshToken(): Observable<AuthResponse> {
+        const refreshToken = localStorage.getItem('refreshToken');
+        return this.http.post<AuthResponse>(`${this.baseUrl}/refresh-token`, {}, { headers: { Authorization: `Bearer ${refreshToken}` }})
+            .pipe(tap(res => {
+                localStorage.setItem('accessToken', res.accessToken);
+                localStorage.setItem('refreshToken', res.refreshToken);
+            })
+        );
+    }
+
+    get accessToken(): string | null {
+        return localStorage.getItem('accessToken');
+    }
+
+    set accessToken(token: string) {
+        localStorage.setItem('accessToken', token);
     }
 }
