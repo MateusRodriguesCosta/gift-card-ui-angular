@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GiftCardTransactionsComponent } from './components/dashboard/gift-card-transactions/gift-card-transactions.component';
 import { GiftCardOverviewComponent } from './components/dashboard/gift-card-overview/gift-card-overview.component';
-import { AuthService } from './shared/services/auth.service';
+import { AuthenticationService } from './security/services/authentication.service';
+import { AuthenticationTokenService } from './security/services/authentication-token.service';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +12,9 @@ import { AuthService } from './shared/services/auth.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(protected authService: AuthService) {}
+  constructor(protected authenticationService: AuthenticationService, protected authenticationTokenService: AuthenticationTokenService) {}
 
   ngOnInit() {
-    if (!this.authService.accessToken) this.authService.login("user", "user123").subscribe();
+    if (!this.authenticationTokenService.accessToken) this.authenticationService.login("user", "user123").subscribe();
   }
 }
