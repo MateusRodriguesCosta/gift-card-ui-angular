@@ -11,8 +11,8 @@ This repository contains an Angular application that serves as an administration
 
 - **Angular 18**
 - **TypeScript** 5.4.2
-- **Bootstrap & PrimeNG**
+- **PrimeNG** 19.0.10
+- **PrimeFlex** 4.0.0
 - **RxJS** 7.8.0
 - **NgRx**
-- **ngx-toastr**
-- **Jasmine & Karma**
+- **Jasmine** 5.6.0
