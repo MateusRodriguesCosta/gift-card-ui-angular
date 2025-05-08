@@ -1,20 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { GiftCardTransactionsComponent } from './components/dashboard/gift-card-transactions/gift-card-transactions.component';
-import { GiftCardOverviewComponent } from './components/dashboard/gift-card-overview/gift-card-overview.component';
-import { AuthenticationService } from './security/services/authentication.service';
-import { AuthenticationTokenService } from './security/services/authentication-token.service';
+import { Component } from '@angular/core';
+import { HomeComponent } from './components/home/home.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [GiftCardTransactionsComponent, GiftCardOverviewComponent],
+  imports: [HomeComponent, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
-
-  constructor(protected authenticationService: AuthenticationService, protected authenticationTokenService: AuthenticationTokenService) {}
-
-  ngOnInit() {
-    if (!this.authenticationTokenService.accessToken) this.authenticationService.login("user", "user123").subscribe();
-  }
+export class AppComponent {
 }

@@ -1,0 +1,8 @@
+@if (this.authenticationTokenService.accessToken) {
+    <div class="layout-container">
+        <div class="layout-grid">
+            <router-outlet />
+            <gift-card-overview />
+        </div>
+    </div>
+}
