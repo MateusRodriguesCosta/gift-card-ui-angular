@@ -1,5 +1,25 @@
-@if (this.authenticationTokenService.accessToken) {
-    <div class="layout-container">
+
+
+@if (this.authenticationTokenService.isLoggedIn) {
+    <div class="layout-container" #root>
+        <p-drawer
+            [(visible)]="visible"
+            [modal]="false"
+            [dismissible]="false"
+            [closeOnEscape]="false"
+            [closable]="false"
+            appendTo="root"
+            position="left"
+            styleClass="w-20rem">
+
+            <p-menu [model]="menuItems"></p-menu>
+            <ng-template #footer>
+                <div class="flex items-center gap-2">
+                    <p-button label="Account" icon="pi pi-user" class="w-full" outlined></p-button>
+                    <p-button label="Logout" icon="pi pi-sign-out" class="w-full" severity="danger" text></p-button>
+                </div>
+            </ng-template>
+        </p-drawer>
         <div class="layout-grid">
             <router-outlet />
             <gift-card-overview />
