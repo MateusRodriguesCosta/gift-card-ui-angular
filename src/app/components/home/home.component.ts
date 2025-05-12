@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { GiftCardOverviewComponent } from '../dashboard/gift-card-overview/gift-card-overview.component';
 import { AuthenticationService } from '../../security/services/authentication.service';
 import { AuthenticationTokenService } from '../../security/services/authentication-token.service';
-import { RouterOutlet } from '@angular/router';
-import { MenuItem } from 'primeng/api';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { MenuItem, PrimeTemplate } from 'primeng/api';
 import { Drawer } from 'primeng/drawer';
 import { Button } from 'primeng/button';
 import { Ripple } from 'primeng/ripple';
@@ -15,7 +15,9 @@ import { Ripple } from 'primeng/ripple';
     RouterOutlet,
     Drawer,
     Button,
-    Ripple
+    Ripple,
+    RouterLink,
+    PrimeTemplate
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
