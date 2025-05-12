@@ -6,6 +6,7 @@ export const routes: Routes = [
         path: '',
         component: HomeComponent,
         children: [
+            { path: '', redirectTo: 'cards-overview', pathMatch: 'full' },
             {
                 path: 'cards-overview',
                 loadComponent: () =>

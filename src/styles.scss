@@ -12,13 +12,11 @@ html {
 
 body {
     background-color: var(--p-surface-50);
-    min-height: 100vh;
 }
 
 .layout-container {
     background-color: var(--p-surface-50);
     color: var(--p-surface-950);
-    min-height: 100vh;
     padding: 2rem;
     display: flex;
     flex-direction: column;
