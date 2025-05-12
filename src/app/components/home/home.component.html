@@ -1,5 +1,51 @@
-@if (this.authenticationTokenService.accessToken) {
+
+
+@if (this.authenticationTokenService.isLoggedIn) {
     <div class="layout-container">
+        <p-drawer
+            [(visible)]="visible"
+            [modal]="false"
+            [dismissible]="false"
+            [closeOnEscape]="false"
+            [closable]="false"
+            position="left"
+            styleClass="w-20rem">
+
+            <ng-template #headless>
+                <div class="flex flex-column h-full">
+                    <div class="overflow-y-auto">
+                        <ul class="list-none p-4 m-0">
+                            <li>
+                                <div class="p-4 flex items-center justify-content-between text-surface-600">
+                                    <span class="font-medium">GIFT CARDS</span>
+                                </div>
+                                <ul class="list-none p-0 m-0 overflow-hidden animation-ease-out">
+                                    <li>
+                                        <a pRipple class="flex align-items-center cursor-pointer p-4 border-round text-surface-700 hover:surface-100 transition-duration-150 transition-colors">
+                                            <i class="pi pi-home mr-2"></i>
+                                            <span class="font-medium">Overview</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a pRipple class="flex align-items-center cursor-pointer p-4 border-round text-surface-700 hover:surface-100 transition-duration-150 transition-colors">
+                                            <i class="pi pi-chart-bar mr-2"></i>
+                                            <span class="font-medium">Transactions</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </ng-template>
+
+            <ng-template #footer>
+                <div class="flex items-center gap-2">
+                    <p-button label="Account" icon="pi pi-user" class="w-full" outlined></p-button>
+                    <p-button label="Logout" icon="pi pi-sign-out" class="w-full" severity="danger" text></p-button>
+                </div>
+            </ng-template>
+        </p-drawer>
         <div class="layout-grid">
             <router-outlet />
             <gift-card-overview />

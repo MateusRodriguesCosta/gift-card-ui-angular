@@ -22,6 +22,10 @@ export class AuthenticationTokenService {
         return localStorage.getItem(this.REFRESH_TOKEN_KEY);
     }
 
+    public get isLoggedIn(): boolean {
+        return !!this.accessToken;
+    }
+
     clearTokens(): void {
         localStorage.removeItem(this.ACCESS_TOKEN_KEY);
         localStorage.removeItem(this.REFRESH_TOKEN_KEY);
