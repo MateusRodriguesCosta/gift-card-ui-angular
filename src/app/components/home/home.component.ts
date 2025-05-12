@@ -4,18 +4,18 @@ import { AuthenticationService } from '../../security/services/authentication.se
 import { AuthenticationTokenService } from '../../security/services/authentication-token.service';
 import { RouterOutlet } from '@angular/router';
 import { MenuItem } from 'primeng/api';
-import { Menu } from 'primeng/menu';
 import { Drawer } from 'primeng/drawer';
 import { Button } from 'primeng/button';
+import { Ripple } from 'primeng/ripple';
 
 @Component({
   selector: 'app-home',
   imports: [
     GiftCardOverviewComponent,
     RouterOutlet,
-    Menu,
     Drawer,
-    Button
+    Button,
+    Ripple
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
