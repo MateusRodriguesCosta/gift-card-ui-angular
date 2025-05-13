@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { GiftCardOverviewComponent } from '../dashboard/gift-card-overview/gift-card-overview.component';
 import { AuthenticationService } from '../../security/services/authentication.service';
 import { AuthenticationTokenService } from '../../security/services/authentication-token.service';
 import { RouterLink, RouterOutlet } from '@angular/router';
@@ -11,7 +10,6 @@ import { Ripple } from 'primeng/ripple';
 @Component({
   selector: 'app-home',
   imports: [
-    GiftCardOverviewComponent,
     RouterOutlet,
     Drawer,
     Button,

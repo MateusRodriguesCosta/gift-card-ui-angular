@@ -25,6 +25,7 @@ import {
 } from 'rxjs';
 import { GiftCard } from '../../../shared/interfaces/gift-card.interface';
 import { Tooltip } from 'primeng/tooltip';
+import { EditCardDialogComponent } from './edit-card-dialog/edit-card-dialog.component';
 
 @Component({
     selector: 'gift-card-overview',
@@ -40,7 +41,8 @@ import { Tooltip } from 'primeng/tooltip';
         TagModule,
         RatingModule,
         ReactiveFormsModule,
-        Tooltip
+        Tooltip,
+        EditCardDialogComponent
     ],
     templateUrl: 'gift-card-overview.component.html',
     host: { class: 'layout-card' },
@@ -52,6 +54,7 @@ export class GiftCardOverviewComponent implements OnInit {
     rows$!: Observable<GiftCard[]>;
     totalRecords = 0;
     loading = false;
+    showEditDialog = false;
     blockingUnblockingMap: Record<string, boolean> = {};
     pageSize = 10;
 
@@ -88,7 +91,9 @@ export class GiftCardOverviewComponent implements OnInit {
         this.lazyLoad$.next(event);
     }
 
-    onClickEditCard($event: Event) {}
+    onClickEditCard() {
+        this.showEditDialog = true;
+    }
     onClickBlockUnblockCard(giftCard: GiftCard) {
         this.blockingUnblockingMap[giftCard.token] = true;
         this.giftCardService.checkGiftCardValidity(giftCard.token).pipe(

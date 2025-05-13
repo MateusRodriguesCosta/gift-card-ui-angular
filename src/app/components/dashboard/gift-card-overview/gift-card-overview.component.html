@@ -52,7 +52,7 @@
                                 rounded="true"
                                 severity="info"
                                 text="true"
-                                (onClick)="onClickEditCard($event)"></p-button>
+                                (onClick)="onClickEditCard()"></p-button>
                         </div>
                         <div class="col-1">
                             <p-button
@@ -112,3 +112,5 @@
         </ng-template>
     </p-table>
 </div>
+
+<app-edit-card-dialog [visible]="showEditDialog" />
