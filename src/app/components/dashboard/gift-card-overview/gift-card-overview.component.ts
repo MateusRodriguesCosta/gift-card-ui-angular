@@ -1,4 +1,4 @@
-import { Component, DEFAULT_CURRENCY_CODE, OnInit } from '@angular/core';
+import { Component, DEFAULT_CURRENCY_CODE, OnDestroy, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -10,22 +10,21 @@ import { TagModule } from 'primeng/tag';
 import { RatingModule } from 'primeng/rating';
 import { GiftCardService } from '../../../shared/services/gift-card.service';
 import {
-    BehaviorSubject,
     catchError,
-    combineLatest,
-    debounceTime, delay,
+    debounceTime,
+    delay,
     distinctUntilChanged,
     finalize,
-    map,
-    Observable,
     of,
     startWith,
-    switchMap,
+    Subject,
+    takeUntil,
     tap
 } from 'rxjs';
 import { GiftCard } from '../../../shared/interfaces/gift-card.interface';
 import { Tooltip } from 'primeng/tooltip';
 import { EditCardDialogComponent } from './edit-card-dialog/edit-card-dialog.component';
+import { GiftCardOverviewDataSource } from '../../../shared/datasources/gift-card-overview.datasource';
 
 @Component({
     selector: 'gift-card-overview',
@@ -48,52 +47,41 @@ import { EditCardDialogComponent } from './edit-card-dialog/edit-card-dialog.com
     host: { class: 'layout-card' },
     styleUrl: 'gift-card-overview.component.scss'
 })
-export class GiftCardOverviewComponent implements OnInit {
-    private lazyLoad$ = new BehaviorSubject<TableLazyLoadEvent>({ first: 0, rows: 10 });
-    searchControl = new FormControl<string>('', {nonNullable: true});
-    rows$!: Observable<GiftCard[]>;
-    totalRecords = 0;
-    loading = false;
-    showEditDialog = false;
-    blockingUnblockingMap: Record<string, boolean> = {};
-    pageSize = 10;
+export class GiftCardOverviewComponent implements OnInit, OnDestroy {
 
-    constructor(private giftCardService: GiftCardService) {}
+    protected searchControl = new FormControl<string>('', {nonNullable: true});
+    protected pageSize = 10;
+    protected showEditDialog = false;
+    protected blockingUnblockingMap: Record<string, boolean> = {};
+    private destroy$ = new Subject<void>();
+
+    constructor(
+        private giftCardService: GiftCardService,
+        protected dataSource: GiftCardOverviewDataSource
+    ) {}
 
     ngOnInit() {
-        const search$ = this.searchControl.valueChanges.pipe(
+        this.dataSource.loadPage(0, this.pageSize, this.searchControl.value);
+        this.searchControl.valueChanges.pipe(
             startWith(this.searchControl.value),
             debounceTime(300),
             distinctUntilChanged(),
-        );
-
-        this.rows$ = combineLatest([this.lazyLoad$, search$]).pipe(
-            tap(() => this.loading = true),
-            switchMap(([event, term]) =>
-                this.giftCardService.getGiftCards(
-                    (event.first ?? 0) / (event.rows ?? this.pageSize),
-                    event.rows ?? this.pageSize,
-                    term
-                ).pipe(
-                    tap(page => this.totalRecords = page.totalElements),
-                    map(page => page.content),
-                    catchError(() => {
-                        this.totalRecords = 0;
-                        return of([]);
-                    })
-                )
-            ),
-            tap(() => this.loading = false),
-        );
+            tap(term => this.dataSource.setFilter(term)),
+            takeUntil(this.destroy$)
+        ).subscribe();
     }
 
-    loadData(event: TableLazyLoadEvent): void {
-        this.lazyLoad$.next(event);
+    ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 
-    onClickEditCard() {
-        this.showEditDialog = true;
+    onLazyLoad(event: TableLazyLoadEvent) {
+        const page = (event.first ?? 0) / (event.rows ?? this.pageSize);
+        const size = (event.rows ?? this.pageSize);
+        this.dataSource.setPage(page, size);
     }
+
     onClickBlockUnblockCard(giftCard: GiftCard) {
         this.blockingUnblockingMap[giftCard.token] = true;
         this.giftCardService.checkGiftCardValidity(giftCard.token).pipe(
@@ -110,6 +98,8 @@ export class GiftCardOverviewComponent implements OnInit {
             })
         ).subscribe();
     }
-
+    onClickEditCard() {
+        this.showEditDialog = true;
+    }
     protected readonly DEFAULT_CURRENCY_CODE = DEFAULT_CURRENCY_CODE;
 }
