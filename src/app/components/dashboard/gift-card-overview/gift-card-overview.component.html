@@ -6,9 +6,9 @@
     </p-iconfield>
 </div>
 <div class="gift-card-table-container">
-    <p-table [value]="(rows$ | async) ?? []" [globalFilterFields]="['token','maskedCardNumber','status']"
-             [paginator]="true" [rows]="pageSize" [totalRecords]="totalRecords" styleClass="gift-card-table"
-             [lazy]="true" (onLazyLoad)="loadData($event)" [loading]="loading">
+    <p-table [value]="(dataSource.connect() | async) ?? []" [globalFilterFields]="['token','maskedCardNumber','status']"
+             [paginator]="true" [rows]="pageSize" [totalRecords]="(dataSource.total$ | async) ?? 0" styleClass="gift-card-table"
+             [lazy]="true" (onLazyLoad)="onLazyLoad($event)" [loading]="(dataSource.loading$ | async)">
         <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="token">Token <p-sortIcon field="token" /></th>
